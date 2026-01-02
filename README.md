@@ -63,33 +63,15 @@ ng test
 
 ## Deploy a GitHub Pages
 
-El proyecto está configurado para desplegarse automáticamente en GitHub Pages.
+El proyecto se despliega automáticamente en GitHub Pages con cada push a `main`.
 
-### Configuración inicial (una sola vez)
+**URL:** https://pguerrerolinares.github.io/portfolio-angular/
 
-1. Crear repositorio en GitHub: `personal-portfolio-angular`
-2. Ir a **Settings > Pages**
-3. En **Source**, seleccionar **GitHub Actions**
-
-### Deploy automático
-
-Cada push a la rama `main` despliega automáticamente:
-
-```bash
-git add .
-git commit -m "feat: descripción del cambio"
-git push origin main
-```
-
-### Build local para GitHub Pages
+### Build local
 
 ```bash
 bun run build:ghpages
 ```
-
-### URL del sitio
-
-Una vez desplegado: `https://<tu-usuario>.github.io/personal-portfolio-angular/`
 
 ## Best Practices Implementadas
 
