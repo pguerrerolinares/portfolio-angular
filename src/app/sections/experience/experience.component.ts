@@ -17,7 +17,7 @@ import { fadeInLeft, fadeInRight } from '../../shared/animations/triggers';
   ],
   animations: [fadeInLeft, fadeInRight],
   template: `
-    <section class="experience section" id="experience">
+    <section class="experience section" id="experience" [attr.aria-label]="'experience.title' | translate">
       <div class="container">
         <app-section-title
           [eyebrow]="'experience.eyebrow' | translate"

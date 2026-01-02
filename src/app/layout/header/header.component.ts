@@ -50,16 +50,17 @@ import { slideInFromRight } from '../../shared/animations/triggers';
             class="header__menu-btn"
             (click)="toggleMobileMenu()"
             [attr.aria-expanded]="isMobileMenuOpen()"
-            aria-label="Abrir menú"
+            [attr.aria-controls]="'mobile-menu'"
+            [attr.aria-label]="isMobileMenuOpen() ? 'Cerrar menú' : 'Abrir menú'"
           >
-            <app-icon [name]="isMobileMenuOpen() ? 'close' : 'menu'" [size]="24" />
+            <app-icon [name]="isMobileMenuOpen() ? 'close' : 'menu'" [size]="24" aria-hidden="true" />
           </button>
         </div>
       </nav>
 
       <!-- Mobile Menu -->
       @if (isMobileMenuOpen()) {
-        <div class="mobile-menu" @slideInFromRight>
+        <div id="mobile-menu" class="mobile-menu" @slideInFromRight role="dialog" aria-label="Menú de navegación">
           <nav class="mobile-menu__nav">
             @for (link of navLinks; track link.href) {
               <a

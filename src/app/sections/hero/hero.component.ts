@@ -11,7 +11,7 @@ import { fadeInUp, fadeIn, maskReveal, bounce } from '../../shared/animations/tr
   imports: [CommonModule, TranslateModule, IconComponent],
   animations: [fadeInUp, fadeIn, maskReveal, bounce],
   template: `
-    <section class="hero" id="hero">
+    <section class="hero" id="hero" [attr.aria-label]="'hero.role' | translate">
       <!-- Background -->
       <div class="hero__background">
         <div class="hero__blob hero__blob--1"></div>

@@ -1,4 +1,4 @@
-import { Component, signal, PLATFORM_ID, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, PLATFORM_ID, inject, DestroyRef, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { SectionTitleComponent } from '../../shared/ui/section-title/section-title.component';
@@ -12,7 +12,7 @@ import { fadeInUp, staggerList } from '../../shared/animations/triggers';
   imports: [CommonModule, TranslateModule, SectionTitleComponent, BadgeComponent],
   animations: [fadeInUp, staggerList],
   template: `
-    <section class="about section" id="about">
+    <section class="about section" id="about" [attr.aria-label]="'about.title' | translate">
       <div class="container">
         <app-section-title
           [eyebrow]="'about.eyebrow' | translate"
@@ -167,7 +167,9 @@ import { fadeInUp, staggerList } from '../../shared/animations/triggers';
 })
 export class AboutComponent {
   private platformId = inject(PLATFORM_ID);
+  private destroyRef = inject(DestroyRef);
   private isBrowser = isPlatformBrowser(this.platformId);
+  private animationTimer: ReturnType<typeof setInterval> | null = null;
 
   skills = SKILLS;
   stats = STATS;
@@ -180,6 +182,12 @@ export class AboutComponent {
     if (this.isBrowser) {
       this.animateCounters();
     }
+
+    this.destroyRef.onDestroy(() => {
+      if (this.animationTimer) {
+        clearInterval(this.animationTimer);
+      }
+    });
   }
 
   private animateCounters(): void {
@@ -189,7 +197,7 @@ export class AboutComponent {
 
     let currentStep = 0;
 
-    const timer = setInterval(() => {
+    this.animationTimer = setInterval(() => {
       currentStep++;
       const progress = currentStep / steps;
       const eased = this.easeOutQuart(progress);
@@ -199,7 +207,8 @@ export class AboutComponent {
       this.animatedProjects.set(Math.round(this.stats.projects * eased));
 
       if (currentStep >= steps) {
-        clearInterval(timer);
+        clearInterval(this.animationTimer!);
+        this.animationTimer = null;
       }
     }, interval);
   }
@@ -215,7 +224,7 @@ export class AboutComponent {
       ai: 'var(--indigo)',
       devops: 'var(--sky)',
       tools: 'var(--text-secondary)',
-      methodologies: '#ca8a04',
+      methodologies: 'var(--warning)',
     };
     return colors[category] || 'var(--primary)';
   }

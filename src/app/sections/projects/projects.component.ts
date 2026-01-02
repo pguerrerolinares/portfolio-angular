@@ -17,7 +17,7 @@ import { fadeInUp, staggerList } from '../../shared/animations/triggers';
   ],
   animations: [fadeInUp, staggerList],
   template: `
-    <section class="projects section" id="projects">
+    <section class="projects section" id="projects" [attr.aria-label]="'projects.title' | translate">
       <div class="container">
         <app-section-title
           [eyebrow]="'projects.eyebrow' | translate"

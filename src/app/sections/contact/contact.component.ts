@@ -1,4 +1,4 @@
-import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, inject, DestroyRef, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { SectionTitleComponent } from '../../shared/ui/section-title/section-title.component';
@@ -17,7 +17,7 @@ import { fadeInUp, staggerList } from '../../shared/animations/triggers';
   ],
   animations: [fadeInUp, staggerList],
   template: `
-    <section class="contact section" id="contact">
+    <section class="contact section" id="contact" [attr.aria-label]="'contact.title' | translate">
       <div class="container">
         <app-section-title
           [eyebrow]="'contact.eyebrow' | translate"
@@ -45,7 +45,7 @@ import { fadeInUp, staggerList } from '../../shared/animations/triggers';
             [label]="'contact.github.label' | translate"
             value="@pguerrerolinares"
             [href]="personalInfo.social.github"
-            accentColor="#6b7280"
+            accentColor="var(--social-github)"
           />
 
           <!-- LinkedIn -->
@@ -54,7 +54,7 @@ import { fadeInUp, staggerList } from '../../shared/animations/triggers';
             [label]="'contact.linkedin.label' | translate"
             value="Paul Guerrero Linares"
             [href]="personalInfo.social.linkedin"
-            accentColor="#0077B5"
+            accentColor="var(--social-linkedin)"
           />
 
           <!-- Location -->
@@ -169,13 +169,17 @@ import { fadeInUp, staggerList } from '../../shared/animations/triggers';
   `,
 })
 export class ContactComponent {
+  private destroyRef = inject(DestroyRef);
+
   personalInfo = PERSONAL_INFO;
   showToast = signal(false);
 
   showCopiedMessage(): void {
     this.showToast.set(true);
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       this.showToast.set(false);
     }, 2000);
+
+    this.destroyRef.onDestroy(() => clearTimeout(timeoutId));
   }
 }

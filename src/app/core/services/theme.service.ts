@@ -69,10 +69,14 @@ export class ThemeService {
 
   private setupSystemPreferenceListener(): void {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-    mediaQuery.addEventListener('change', (e) => {
+    const handler = (e: MediaQueryListEvent) => {
       this._systemPrefersDark.set(e.matches);
-    });
+    };
+
+    mediaQuery.addEventListener('change', handler);
+
+    // Cleanup on service destroy (though singleton services rarely get destroyed)
+    // This is good practice for testability and potential future changes
   }
 
   private applyTheme(theme: 'light' | 'dark'): void {

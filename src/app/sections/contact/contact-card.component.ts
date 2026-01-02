@@ -1,4 +1,4 @@
-import { Component, input, output, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input, output, signal, inject, DestroyRef, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconComponent, IconName } from '../../shared/ui/icon/icon.component';
 
@@ -14,8 +14,9 @@ import { IconComponent, IconName } from '../../shared/ui/icon/icon.component';
         [rel]="external() ? 'noopener noreferrer' : null"
         class="contact-card contact-card--link"
         [style.--accent-color]="accentColor()"
+        [attr.aria-label]="external() ? label() + ' (abre en nueva pestaña)' : label()"
       >
-        <ng-container *ngTemplateOutlet="cardContent" />
+        <ng-container [ngTemplateOutlet]="cardContent" />
       </a>
     } @else if (copyable()) {
       <button
@@ -24,16 +25,23 @@ import { IconComponent, IconName } from '../../shared/ui/icon/icon.component';
         (click)="copyToClipboard()"
         [attr.aria-label]="'Copiar ' + value()"
       >
-        <ng-container *ngTemplateOutlet="cardContent" />
+        <ng-container [ngTemplateOutlet]="cardContent" />
       </button>
     } @else {
       <div class="contact-card" [style.--accent-color]="accentColor()">
-        <ng-container *ngTemplateOutlet="cardContent" />
+        <ng-container [ngTemplateOutlet]="cardContent" />
       </div>
     }
 
+    <!-- Anuncio accesible para copiado -->
+    <div role="status" aria-live="polite" class="sr-only">
+      @if (copied()) {
+        <span>Copiado al portapapeles</span>
+      }
+    </div>
+
     <ng-template #cardContent>
-      <div class="contact-card__icon">
+      <div class="contact-card__icon" aria-hidden="true">
         <app-icon [name]="icon()" [size]="24" />
       </div>
       <div class="contact-card__content">
@@ -41,7 +49,7 @@ import { IconComponent, IconName } from '../../shared/ui/icon/icon.component';
         <span class="contact-card__value">{{ value() }}</span>
       </div>
       @if (href() || copyable()) {
-        <div class="contact-card__action">
+        <div class="contact-card__action" aria-hidden="true">
           @if (copied()) {
             <app-icon name="check" [size]="18" />
           } @else if (copyable()) {
@@ -137,6 +145,8 @@ import { IconComponent, IconName } from '../../shared/ui/icon/icon.component';
   `,
 })
 export class ContactCardComponent {
+  private destroyRef = inject(DestroyRef);
+
   icon = input.required<IconName>();
   label = input.required<string>();
   value = input.required<string>();
@@ -154,9 +164,11 @@ export class ContactCardComponent {
       this.copied.set(true);
       this.onCopy.emit(this.value());
 
-      setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         this.copied.set(false);
       }, 2000);
+
+      this.destroyRef.onDestroy(() => clearTimeout(timeoutId));
     } catch (err) {
       console.error('Failed to copy:', err);
     }
