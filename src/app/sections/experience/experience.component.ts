@@ -63,11 +63,11 @@ import { fadeInLeft, fadeInRight } from '../../shared/animations/triggers';
       }
 
       &__item {
-        display: grid;
-        gap: $spacing-md;
-        grid-template-columns: 1fr auto;
+        display: block;
 
         @include lg {
+          display: grid;
+          gap: $spacing-md;
           grid-template-columns: 1fr auto 1fr;
         }
 
@@ -91,12 +91,13 @@ import { fadeInLeft, fadeInRight } from '../../shared/animations/triggers';
       }
 
       &__connector {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-top: $spacing-lg;
+        display: none;
 
         @include lg {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding-top: $spacing-lg;
           grid-column: 2;
         }
       }
