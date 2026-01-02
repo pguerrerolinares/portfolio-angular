@@ -42,7 +42,7 @@ import { fadeInUp, staggerList } from '../../shared/animations/triggers';
         @if (otherProjects().length > 0) {
           <div class="projects__group">
             <h3 class="projects__group-title">{{ 'projects.other' | translate }}</h3>
-            <div class="projects__grid projects__grid--small" @staggerList>
+            <div class="projects__grid" @staggerList>
               @for (project of otherProjects(); track project.id) {
                 <app-project-card [project]="project" />
               }
@@ -76,16 +76,6 @@ import { fadeInUp, staggerList } from '../../shared/animations/triggers';
 
         @include md {
           grid-template-columns: repeat(2, 1fr);
-        }
-
-        @include lg {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-      &__grid--small {
-        @include lg {
-          grid-template-columns: repeat(3, 1fr);
         }
       }
     }
