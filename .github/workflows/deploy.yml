@@ -30,7 +30,7 @@ jobs:
         run: bun install
 
       - name: Build
-        run: bun run build -- --base-href /personal-portfolio-angular/
+        run: bun run build -- --base-href /portfolio-angular/
 
       - name: Copy 404.html for SPA routing
         run: cp dist/portfolio/browser/index.html dist/portfolio/browser/404.html
