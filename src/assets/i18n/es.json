@@ -1,0 +1,186 @@
+{
+  "metadata": {
+    "title": "Paul Guerrero Linares - Ingeniero Informático",
+    "description": "Portfolio profesional de Paul Guerrero Linares - Ingeniero Informático especializado en aplicaciones empresariales, desde IoT hasta plataformas de inversión."
+  },
+  "nav": {
+    "about": "Sobre mí",
+    "projects": "Proyectos",
+    "experience": "Experiencia",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "greeting": "Hola, soy",
+    "name": "Paul Guerrero",
+    "role": "Ingeniero Informático",
+    "description": "Especializado en aplicaciones empresariales que marcan la diferencia, desde IoT hasta plataformas de inversión.",
+    "cta": {
+      "projects": "Ver Proyectos",
+      "contact": "Contactar"
+    },
+    "scroll": "Desliza"
+  },
+  "about": {
+    "eyebrow": "SOBRE MÍ",
+    "title": "Ingeniero por pasión, solucionador de problemas por naturaleza",
+    "bio": {
+      "p1": "Desarrollador full-stack con dominio real de ambos mundos: interfaces modernas que los usuarios aman y backends robustos que las empresas necesitan. Desde dispositivos IoT hasta plataformas digitales escalables.",
+      "p2": "Me especializo en proyectos donde la complejidad técnica se encuentra con la realidad empresarial. Entornos donde hay que integrar lo nuevo con sistemas legacy, cumplir requisitos de seguridad estrictos y navegar arquitecturas corporativas complejas.",
+      "p3": "El mejor código es el que resuelve problemas de negocio y hace crecer equipos. Colaboro estrechamente con product owners, traduzco necesidades complejas en soluciones técnicas y me aseguro de que cada entrega aporte valor real. Porque el software es un medio, no un fin."
+    },
+    "stats": {
+      "years": "Años de Experiencia",
+      "technologies": "Tecnologías",
+      "projects": "Proyectos Entregados"
+    },
+    "skills": {
+      "title": "Habilidades Técnicas",
+      "more": "+ Herramientas, metodologías y más en mi sección de experiencia"
+    }
+  },
+  "projects": {
+    "eyebrow": "PROYECTOS",
+    "title": "Proyectos",
+    "description": "Una selección de proyectos en los que he trabajado, desde pipelines de IA hasta aplicaciones full-stack.",
+    "featured": "Proyectos Destacados",
+    "other": "Otros Proyectos",
+    "viewCode": "Ver código",
+    "viewLive": "Ver demo",
+    "moreTech": "+{count} más",
+    "cta": {
+      "text": "¿Quieres ver más?",
+      "button": "Ver Perfil de GitHub"
+    },
+    "items": {
+      "ocr-pipeline": {
+        "title": "Pipeline de Procesamiento Inteligente de Documentos",
+        "description": "Pipeline de OCR y comprensión de documentos de extremo a extremo utilizando modelos de visión-lenguaje de última generación.",
+        "longDescription": "Un pipeline completo para extraer datos estructurados de documentos usando docTR, PaddleOCR, LayoutLMv3 y Qwen3-VL. Desplegado en Kubernetes con soporte GPU y cumplimiento estricto de seguridad."
+      },
+      "finnk-onboarding": {
+        "title": "Plataforma Digital de Fondos de Inversión",
+        "description": "Plataforma digital completa para fondos de inversión: desde verificación bancaria y onboarding hasta seguimiento de carteras en tiempo real."
+      },
+      "iot-dashboard": {
+        "title": "Plataforma de Gestión IoT",
+        "description": "Infraestructura completa para miles de dispositivos IoT: comunicación bidireccional con AWS IoT, gestión de colas y topics."
+      },
+      "automation-toolkit": {
+        "title": "Kit de Herramientas de Scraping y Automatización",
+        "description": "Colección de herramientas Python para web scraping, automatización de tareas y utilidades de procesamiento de datos."
+      }
+    }
+  },
+  "experience": {
+    "eyebrow": "EXPERIENCIA",
+    "title": "Experiencia",
+    "description": "Mi trayectoria profesional en ingeniería de software, desde soluciones IoT hasta sistemas potenciados por IA.",
+    "current": "Actual",
+    "present": "Actualidad",
+    "cta": {
+      "text": "¿Quieres el panorama completo?",
+      "button": "Descargar CV"
+    },
+    "items": {
+      "finnk": {
+        "company": "Kutxabank Investment – Finnk",
+        "role": "Ingeniero Informático (Frontend & Backend)",
+        "description": "Desarrollo de funcionalidades clave dentro del ecosistema Finnk, combinando frontend (Angular, Ionic/Capacitor, Angular Material, librerías de gráficos) y backend Java en entornos corporativos complejos.",
+        "highlights": {
+          "0": "Evolución de flujos críticos de onboarding digital: carga de documentos, validaciones, OTP, promociones y componentes de visualización financiera",
+          "1": "Integración continua y despliegues vía Kubernetes con pipelines automatizados de GitLab CI",
+          "2": "Colaboración estrecha con equipos de negocio, marketing y seguridad para alinear requisitos y validar flujos sensibles",
+          "3": "Intervención en entornos con arquitecturas legacy y módulos Java personalizados, garantizando compatibilidad y estabilidad"
+        }
+      },
+      "onnera": {
+        "company": "Onnera Group",
+        "role": "Desarrollador de Software – IoT & Cloud",
+        "description": "Desarrollo de soluciones IoT combinando Angular, Spring Boot y servicios cloud de AWS.",
+        "highlights": {
+          "0": "Implementación de lambdas, colas, topics y device shadow para comunicación dispositivo-backend",
+          "1": "Creación de dashboards y herramientas internas para monitorización de dispositivos y estado de red IoT",
+          "2": "Trabajo bajo metodología Scrum, participando en sprints, refinamientos, estimación y mejora continua"
+        }
+      },
+      "personal": {
+        "company": "Proyectos Personales y Experimentación Técnica",
+        "role": "Desarrollador Independiente – Python, IA, Automatización",
+        "description": "Desarrollo constante de proyectos personales en Python, especialmente para webscraping, automatización de tareas y utilidades internas.",
+        "highlights": {
+          "0": "Experimentación profunda con IA de código abierto, construyendo pipelines completos de OCR y extracción de datos desde documentación oficial",
+          "1": "Práctica continua en containerización, creación de imágenes Docker, automatización de entornos y evaluación de modelos visión-lenguaje en GPU local",
+          "2": "Investigación y adopción de nuevas herramientas, patrones y arquitecturas para mejorar productividad y calidad técnica"
+        }
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "CONTACTO",
+    "title": "Contacto",
+    "description": "Siempre estoy abierto a discutir nuevos proyectos, ideas creativas u oportunidades para ser parte de tu visión.",
+    "email": {
+      "label": "Email",
+      "copied": "¡Copiado al portapapeles!"
+    },
+    "github": {
+      "label": "GitHub"
+    },
+    "linkedin": {
+      "label": "LinkedIn"
+    },
+    "location": {
+      "label": "Ubicación"
+    },
+    "cta": "¡No dudes en contactarme a través de cualquiera de estos canales!",
+    "actions": {
+      "open": "Abrir",
+      "send": "Enviar",
+      "clickToCopy": "Clic para copiar"
+    },
+    "availability": {
+      "title": "Abierto a oportunidades",
+      "description": "Disponible para freelance y tiempo completo"
+    }
+  },
+  "footer": {
+    "copyright": "© {{year}} Paul Guerrero Linares. Todos los derechos reservados.",
+    "tagline": "Construyendo experiencias digitales que marcan la diferencia.",
+    "builtWith": "Hecho con Angular 21"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "backToTop": "Volver arriba",
+    "present": "Actualidad",
+    "viewMore": "Ver Más",
+    "viewLess": "Ver Menos",
+    "experienceTypes": {
+      "fulltime": "Tiempo Completo",
+      "freelance": "Freelance",
+      "personal": "Personal"
+    },
+    "skipToMainContent": "Saltar al contenido principal",
+    "goToHomepage": "Ir a la página principal",
+    "toggleMenu": "Abrir menú",
+    "menu": "Menú",
+    "closeMenu": "Cerrar menú",
+    "toggleTheme": "Cambiar tema",
+    "switchLanguage": "Cambiar idioma",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "email": "Email",
+    "copiedToClipboard": "¡Copiado al portapapeles!",
+    "failedToCopy": "Error al copiar",
+    "current": "Actual"
+  },
+  "theme": {
+    "light": "Modo claro",
+    "dark": "Modo oscuro",
+    "system": "Sistema"
+  },
+  "language": {
+    "es": "Español",
+    "en": "English"
+  }
+}

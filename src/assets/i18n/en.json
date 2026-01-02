@@ -1,0 +1,186 @@
+{
+  "metadata": {
+    "title": "Paul Guerrero Linares - Software Engineer",
+    "description": "Professional portfolio of Paul Guerrero Linares - Software Engineer specialized in enterprise applications, from IoT to investment platforms."
+  },
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Paul Guerrero",
+    "role": "Software Engineer",
+    "description": "Specialized in enterprise applications that make a difference, from IoT to investment platforms.",
+    "cta": {
+      "projects": "View Projects",
+      "contact": "Get in Touch"
+    },
+    "scroll": "Scroll"
+  },
+  "about": {
+    "eyebrow": "ABOUT ME",
+    "title": "Engineer by passion, problem solver by nature",
+    "bio": {
+      "p1": "Full-stack developer with real mastery of both worlds: modern interfaces that users love and robust backends that businesses need. From IoT devices to scalable digital platforms.",
+      "p2": "I specialize in projects where technical complexity meets business reality. Environments where you need to integrate new technologies with legacy systems, meet strict security requirements, and navigate complex corporate architectures.",
+      "p3": "The best code is the one that solves business problems and grows teams. I work closely with product owners, translate complex needs into technical solutions, and ensure every delivery brings real value. Because software is a means, not an end."
+    },
+    "stats": {
+      "years": "Years Experience",
+      "technologies": "Technologies",
+      "projects": "Projects Delivered"
+    },
+    "skills": {
+      "title": "Technical Skills",
+      "more": "+ Tools, methodologies, and more in my experience section"
+    }
+  },
+  "projects": {
+    "eyebrow": "PROJECTS",
+    "title": "Projects",
+    "description": "A selection of projects I've worked on, from AI pipelines to full-stack applications.",
+    "featured": "Featured Projects",
+    "other": "Other Projects",
+    "viewCode": "View code",
+    "viewLive": "View demo",
+    "moreTech": "+{count} more",
+    "cta": {
+      "text": "Want to see more?",
+      "button": "View GitHub Profile"
+    },
+    "items": {
+      "ocr-pipeline": {
+        "title": "Intelligent Document Processing Pipeline",
+        "description": "End-to-end OCR and document understanding pipeline using state-of-the-art vision-language models.",
+        "longDescription": "A complete pipeline for extracting structured data from documents using docTR, PaddleOCR, LayoutLMv3, and Qwen3-VL. Deployed on Kubernetes with GPU support and strict security compliance."
+      },
+      "finnk-onboarding": {
+        "title": "Digital Investment Funds Platform",
+        "description": "Complete digital platform for investment funds: from banking verification and onboarding to real-time portfolio tracking."
+      },
+      "iot-dashboard": {
+        "title": "IoT Management Platform",
+        "description": "Complete infrastructure for thousands of IoT devices: bidirectional communication with AWS IoT, queue and topic management."
+      },
+      "automation-toolkit": {
+        "title": "Web Scraping & Automation Toolkit",
+        "description": "Collection of Python tools for web scraping, task automation, and data processing utilities."
+      }
+    }
+  },
+  "experience": {
+    "eyebrow": "EXPERIENCE",
+    "title": "Experience",
+    "description": "My professional journey through software engineering, from IoT solutions to AI-powered systems.",
+    "current": "Current",
+    "present": "Present",
+    "cta": {
+      "text": "Want the full picture?",
+      "button": "Download Resume"
+    },
+    "items": {
+      "finnk": {
+        "company": "Kutxabank Investment – Finnk",
+        "role": "Software Engineer (Frontend & Backend)",
+        "description": "Development of key functionalities within the Finnk ecosystem, combining frontend (Angular, Ionic/Capacitor, Angular Material, charting libraries) and backend Java in complex corporate environments.",
+        "highlights": {
+          "0": "Evolution of critical digital onboarding flows: document upload, validations, OTP, promotions, and financial visualization components",
+          "1": "Continuous integration and deployments via Kubernetes with automated GitLab CI pipelines",
+          "2": "Close collaboration with business, marketing, and security teams to align requirements and validate sensitive flows",
+          "3": "Intervention in environments with legacy architectures and custom Java modules, ensuring compatibility and stability"
+        }
+      },
+      "onnera": {
+        "company": "Onnera Group",
+        "role": "Software Developer – IoT & Cloud",
+        "description": "Development of IoT solutions combining Angular, Spring Boot, and AWS cloud services.",
+        "highlights": {
+          "0": "Implementation of lambdas, queues, topics, and device shadow for device-backend communication",
+          "1": "Creation of dashboards and internal tools for device monitoring and IoT network status",
+          "2": "Work under Scrum methodology, participating in sprints, refinements, estimation, and continuous improvement"
+        }
+      },
+      "personal": {
+        "company": "Personal Projects & Technical Experimentation",
+        "role": "Independent Developer – Python, AI, Automation",
+        "description": "Constant development of personal projects in Python, especially for webscraping, task automation, and internal utilities.",
+        "highlights": {
+          "0": "In-depth experimentation with open-source AI, building complete OCR and data extraction pipelines from official documentation",
+          "1": "Continuous practice in containerization, Docker image creation, environment automation, and evaluation of vision-language models on local GPU",
+          "2": "Research and adoption of new tools, patterns, and architectures to improve productivity and technical quality"
+        }
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "CONTACT",
+    "title": "Get in Touch",
+    "description": "I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.",
+    "email": {
+      "label": "Email",
+      "copied": "Copied to clipboard!"
+    },
+    "github": {
+      "label": "GitHub"
+    },
+    "linkedin": {
+      "label": "LinkedIn"
+    },
+    "location": {
+      "label": "Location"
+    },
+    "cta": "Feel free to reach out through any of these channels!",
+    "actions": {
+      "open": "Open",
+      "send": "Send",
+      "clickToCopy": "Click to copy"
+    },
+    "availability": {
+      "title": "Open to opportunities",
+      "description": "Available for freelance & full-time roles"
+    }
+  },
+  "footer": {
+    "copyright": "© {{year}} Paul Guerrero Linares. All rights reserved.",
+    "tagline": "Building digital experiences that make a difference.",
+    "builtWith": "Built with Angular 21"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "backToTop": "Back to top",
+    "present": "Present",
+    "viewMore": "View More",
+    "viewLess": "View Less",
+    "experienceTypes": {
+      "fulltime": "Full-time",
+      "freelance": "Freelance",
+      "personal": "Personal"
+    },
+    "skipToMainContent": "Skip to main content",
+    "goToHomepage": "Go to homepage",
+    "toggleMenu": "Toggle menu",
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "toggleTheme": "Toggle theme",
+    "switchLanguage": "Switch language",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "email": "Email",
+    "copiedToClipboard": "Copied to clipboard!",
+    "failedToCopy": "Failed to copy",
+    "current": "Current"
+  },
+  "theme": {
+    "light": "Light mode",
+    "dark": "Dark mode",
+    "system": "System"
+  },
+  "language": {
+    "es": "Español",
+    "en": "English"
+  }
+}

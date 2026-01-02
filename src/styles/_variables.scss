@@ -1,0 +1,140 @@
+// ======================
+// COLOR PALETTE
+// ======================
+
+// Light Mode
+$primary-light: #0071e3;
+$background-light: #f5f5f7;
+$surface-light: #ffffff;
+$text-primary-light: #1d1d1f;
+$text-secondary-light: #86868b;
+
+// Dark Mode
+$primary-dark: #0a84ff;
+$background-dark: #000000;
+$surface-dark: #1c1c1e;
+$text-primary-dark: #f5f5f7;
+$text-secondary-dark: #98989d;
+
+// Accent Colors
+$teal-light: #0d9488;
+$teal-dark: #14b8a6;
+$indigo: #6366f1;
+$sky: #0ea5e9;
+$error: #ff3b30;
+$success: #30d158;
+
+// Category Colors (for projects)
+$category-web: #0071e3;
+$category-mobile: #0ea5e9;
+$category-ai: #6366f1;
+$category-automation: #0d9488;
+$category-other: #64748b;
+
+// ======================
+// TYPOGRAPHY
+// ======================
+
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+$font-size-xs: 0.75rem;    // 12px
+$font-size-sm: 0.875rem;   // 14px
+$font-size-base: 1rem;     // 16px
+$font-size-lg: 1.125rem;   // 18px
+$font-size-xl: 1.25rem;    // 20px
+$font-size-2xl: 1.5rem;    // 24px
+$font-size-3xl: 1.875rem;  // 30px
+$font-size-4xl: 2.25rem;   // 36px
+$font-size-5xl: 3rem;      // 48px
+$font-size-6xl: 3.75rem;   // 60px
+$font-size-display: clamp(2.5rem, 8vw, 4rem);
+$font-size-hero: clamp(3rem, 12vw, 6rem);
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$line-height-tight: 1.1;
+$line-height-snug: 1.25;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.625;
+
+$letter-spacing-tight: -0.02em;
+$letter-spacing-normal: 0;
+$letter-spacing-wide: 0.05em;
+$letter-spacing-eyebrow: 0.15em;
+
+// ======================
+// SPACING
+// ======================
+
+$spacing-xs: 0.25rem;   // 4px
+$spacing-sm: 0.5rem;    // 8px
+$spacing-md: 1rem;      // 16px
+$spacing-lg: 1.5rem;    // 24px
+$spacing-xl: 2rem;      // 32px
+$spacing-2xl: 3rem;     // 48px
+$spacing-3xl: 4rem;     // 64px
+$spacing-4xl: 6rem;     // 96px
+
+$section-padding-y: clamp(3.5rem, 8vw, 5rem);
+$container-padding-x: clamp(1rem, 4vw, 1.5rem);
+
+// ======================
+// BORDERS & RADIUS
+// ======================
+
+$border-radius-sm: 0.5rem;    // 8px
+$border-radius-md: 1rem;      // 16px
+$border-radius-lg: 1.5rem;    // 24px
+$border-radius-full: 9999px;
+
+$border-width: 1px;
+
+// ======================
+// SHADOWS
+// ======================
+
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+
+// ======================
+// TRANSITIONS
+// ======================
+
+$transition-fast: 150ms ease;
+$transition-base: 200ms ease;
+$transition-slow: 300ms ease;
+$transition-slower: 500ms ease;
+
+$easing-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+$easing-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+// ======================
+// BREAKPOINTS
+// ======================
+
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+// ======================
+// Z-INDEX
+// ======================
+
+$z-index-dropdown: 100;
+$z-index-sticky: 200;
+$z-index-fixed: 300;
+$z-index-modal-backdrop: 400;
+$z-index-modal: 500;
+$z-index-tooltip: 600;
+
+// ======================
+// CONTAINER
+// ======================
+
+$container-max-width: 1280px;
