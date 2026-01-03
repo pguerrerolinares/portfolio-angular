@@ -41,31 +41,11 @@ const ICONS: Record<IconName, string> = {
 
 @Component({
   selector: 'app-icon',
+  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
-  template: `
-    <svg
-      [attr.width]="size()"
-      [attr.height]="size()"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      [attr.aria-label]="ariaLabel()"
-      [attr.aria-hidden]="!ariaLabel()"
-      role="img"
-      [innerHTML]="svgContent()"
-    ></svg>
-  `,
-  styles: `
-    :host {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    svg {
-      flex-shrink: 0;
-    }
-  `,
+  templateUrl: './icon.component.html',
+  styleUrl: './icon.component.scss',
 })
 export class IconComponent {
   private sanitizer = inject(DomSanitizer);

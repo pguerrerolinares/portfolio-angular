@@ -1,0 +1,70 @@
+<section class="contact section" id="contact" [attr.aria-label]="'contact.title' | translate">
+  <div class="container">
+    <app-section-title
+      [eyebrow]="'contact.eyebrow' | translate"
+      [description]="'contact.description' | translate"
+      [centered]="true"
+    >
+      {{ 'contact.title' | translate }}
+    </app-section-title>
+
+    <!-- Contact Cards Grid -->
+    <div class="contact__grid" @staggerList>
+      <!-- Email -->
+      <app-contact-card
+        icon="email"
+        [label]="'contact.email.label' | translate"
+        [value]="personalInfo.email"
+        [copyable]="true"
+        accentColor="var(--arcade-cyan)"
+        (onCopy)="showCopiedMessage()"
+      />
+
+      <!-- GitHub -->
+      <app-contact-card
+        icon="github"
+        [label]="'contact.github.label' | translate"
+        value="@pguerrerolinares"
+        [href]="personalInfo.social.github"
+        accentColor="var(--phosphor-green)"
+      />
+
+      <!-- LinkedIn -->
+      <app-contact-card
+        icon="linkedin"
+        [label]="'contact.linkedin.label' | translate"
+        value="Paul Guerrero Linares"
+        [href]="personalInfo.social.linkedin"
+        accentColor="var(--arcade-cyan)"
+      />
+
+      <!-- Location -->
+      <app-contact-card
+        icon="location"
+        [label]="'contact.location.label' | translate"
+        [value]="personalInfo.location"
+        accentColor="var(--arcade-yellow)"
+      />
+    </div>
+
+    <!-- Availability -->
+    <div class="contact__availability" @fadeInUp>
+      <div class="contact__availability-indicator">
+        <span class="contact__pulse"></span>
+        <span class="contact__availability-text">
+          {{ 'contact.availability.title' | translate }}
+        </span>
+      </div>
+      <p class="contact__availability-description">
+        {{ 'contact.availability.description' | translate }}
+      </p>
+    </div>
+
+    <!-- Toast -->
+    @if (showToast()) {
+      <div class="contact__toast" @fadeInUp>
+        {{ 'contact.email.copied' | translate }}
+      </div>
+    }
+  </div>
+</section>

@@ -1,0 +1,12 @@
+<div class="section-title" [class.section-title--centered]="centered()">
+  @if (eyebrow()) {
+    <span class="section-title__eyebrow">> {{ eyebrow() }}</span>
+  }
+  <h2 class="section-title__heading">
+    <ng-content />
+  </h2>
+  <div class="section-title__separator" aria-hidden="true">════════════════</div>
+  @if (description()) {
+    <p class="section-title__description">{{ description() }}</p>
+  }
+</div>

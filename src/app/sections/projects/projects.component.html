@@ -1,0 +1,34 @@
+<section class="projects section" id="projects" [attr.aria-label]="'projects.title' | translate">
+  <div class="container">
+    <app-section-title
+      [eyebrow]="'projects.eyebrow' | translate"
+      [description]="'projects.description' | translate"
+    >
+      {{ 'projects.title' | translate }}
+    </app-section-title>
+
+    <!-- Featured Projects -->
+    @if (featuredProjects().length > 0) {
+      <div class="projects__group">
+        <h3 class="projects__group-title">> {{ 'projects.featured' | translate }}</h3>
+        <div class="projects__grid" @staggerList>
+          @for (project of featuredProjects(); track project.id) {
+            <app-project-card [project]="project" />
+          }
+        </div>
+      </div>
+    }
+
+    <!-- Other Projects -->
+    @if (otherProjects().length > 0) {
+      <div class="projects__group">
+        <h3 class="projects__group-title">> {{ 'projects.other' | translate }}</h3>
+        <div class="projects__grid" @staggerList>
+          @for (project of otherProjects(); track project.id) {
+            <app-project-card [project]="project" />
+          }
+        </div>
+      </div>
+    }
+  </div>
+</section>

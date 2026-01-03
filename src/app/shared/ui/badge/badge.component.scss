@@ -1,0 +1,64 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.badge {
+  @include pixel-text;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: 2px $spacing-xs;
+  font-size: 6px;
+  white-space: nowrap;
+  border: $border-width solid $border-color;
+  background: $bg-surface;
+  color: $text-dim;
+  transition: all $transition-fast;
+
+  @include md {
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-xs;
+  }
+}
+
+.badge--default {
+  background: $bg-secondary;
+  color: $text-dim;
+  border-color: $border-color;
+}
+
+.badge--primary {
+  background: rgba($phosphor-green, 0.1);
+  color: $phosphor-green;
+  border-color: rgba($phosphor-green, 0.3);
+}
+
+.badge--success {
+  background: rgba($phosphor-green, 0.1);
+  color: $phosphor-green;
+  border-color: rgba($phosphor-green, 0.3);
+}
+
+.badge--warning {
+  background: rgba($arcade-yellow, 0.1);
+  color: $arcade-yellow;
+  border-color: rgba($arcade-yellow, 0.3);
+}
+
+.badge--category {
+  background: color-mix(in srgb, var(--badge-color, $phosphor-green) 10%, transparent);
+  color: var(--badge-color, $phosphor-green);
+  border-color: color-mix(in srgb, var(--badge-color, $phosphor-green) 30%, transparent);
+
+  &:hover {
+    @include crt-glow-sm(var(--badge-color, $phosphor-green));
+  }
+}
+
+.badge--small {
+  padding: 2px $spacing-xs;
+  font-size: 5px;
+
+  @include md {
+    font-size: 0.5rem;
+  }
+}

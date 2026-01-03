@@ -1,0 +1,38 @@
+<div class="language-select">
+  <button
+    class="language-select__trigger"
+    (click)="toggleDropdown()"
+    [attr.aria-expanded]="isOpen()"
+    aria-haspopup="listbox"
+    aria-label="Seleccionar idioma"
+  >
+    <span class="language-select__prompt">></span>
+    <span class="language-select__current">{{ currentLangLabel() }}</span>
+    <app-icon
+      name="arrow-down"
+      [size]="16"
+      class="language-select__icon"
+      [class.language-select__icon--open]="isOpen()"
+      aria-hidden="true"
+    />
+  </button>
+
+  @if (isOpen()) {
+    <ul class="language-select__dropdown" role="listbox" aria-label="Idiomas disponibles">
+      @for (lang of languages; track lang.code) {
+        <li
+          class="language-select__option"
+          [class.language-select__option--active]="currentLang() === lang.code"
+          role="option"
+          [attr.aria-selected]="currentLang() === lang.code"
+          (click)="selectLanguage(lang.code)"
+        >
+          <span class="language-select__option-indicator">
+            {{ currentLang() === lang.code ? '>' : ' ' }}
+          </span>
+          {{ lang.label }}
+        </li>
+      }
+    </ul>
+  }
+</div>

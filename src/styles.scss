@@ -2,22 +2,42 @@
 @use 'styles/mixins' as *;
 
 // ======================
-// CSS CUSTOM PROPERTIES (Theme)
+// CSS CUSTOM PROPERTIES (Retro Theme)
 // ======================
 
 :root {
-  // Light theme (default)
-  --primary: #{$primary-light};
-  --background: #{$background-light};
-  --surface: #{$surface-light};
-  --surface-hover: #{rgba($text-primary-light, 0.05)};
-  --text-primary: #{$text-primary-light};
-  --text-secondary: #{$text-secondary-light};
-  --border: #{rgba($text-primary-light, 0.1)};
-  --teal: #{$teal-light};
-  --indigo: #{$indigo};
-  --sky: #{$sky};
-  --warning: #{$warning};
+  // Primary colors
+  --primary: #{$phosphor-green};
+  --primary-dim: #{$text-dim};
+  --primary-bright: #{$text-bright};
+
+  // Background colors
+  --background: #{$bg-primary};
+  --surface: #{$bg-surface};
+  --surface-hover: #{$bg-secondary};
+
+  // Text colors
+  --text-primary: #{$phosphor-green};
+  --text-secondary: #{$text-dim};
+
+  // Border colors
+  --border: #{$border-color};
+  --border-glow: #{$border-glow};
+
+  // Accent colors
+  --teal: #{$arcade-cyan};
+  --indigo: #{$arcade-magenta};
+  --sky: #{$arcade-cyan};
+  --warning: #{$arcade-yellow};
+  --error: #{$arcade-red};
+
+  // Arcade colors
+  --arcade-red: #{$arcade-red};
+  --arcade-yellow: #{$arcade-yellow};
+  --arcade-cyan: #{$arcade-cyan};
+  --arcade-magenta: #{$arcade-magenta};
+  --arcade-orange: #{$arcade-orange};
+  --phosphor-amber: #{$phosphor-amber};
 
   // Social media colors
   --social-github: #{$social-github};
@@ -31,31 +51,24 @@
   --category-other: #{$category-other};
 
   // Shadows
-  --shadow-sm: #{$shadow-sm};
-  --shadow-md: #{$shadow-md};
-  --shadow-lg: #{$shadow-lg};
-  --shadow-xl: #{$shadow-xl};
-
-  color-scheme: light;
-}
-
-[data-theme='dark'] {
-  --primary: #{$primary-dark};
-  --background: #{$background-dark};
-  --surface: #{$surface-dark};
-  --surface-hover: #{rgba($text-primary-dark, 0.08)};
-  --text-primary: #{$text-primary-dark};
-  --text-secondary: #{$text-secondary-dark};
-  --border: #{rgba($text-primary-dark, 0.15)};
-  --teal: #{$teal-dark};
-
-  // Adjust shadows for dark mode
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+  --shadow-sm: #{$shadow-retro-sm};
+  --shadow-md: #{$shadow-retro};
+  --shadow-lg: #{$shadow-retro-lg};
+  --shadow-xl: #{$shadow-retro-lg};
 
   color-scheme: dark;
+}
+
+// Dark mode es el default, pero mantenemos el selector para compatibilidad
+[data-theme='dark'] {
+  // Same as :root - ya es dark por defecto
+}
+
+// Light mode (si alguien lo quiere, aunque no es el estilo retro)
+[data-theme='light'] {
+  --background: #1a1a1a;
+  --surface: #242424;
+  // Mantener colores phosphor para consistencia retro
 }
 
 // ======================
@@ -72,6 +85,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 
   @include reduced-motion {
     scroll-behavior: auto;
@@ -79,16 +93,32 @@ html {
 }
 
 body {
-  font-family: $font-family;
-  font-size: $font-size-base;
+  overflow-x: hidden;
+  @include terminal-text;
+  font-size: $font-size-terminal-base;
   line-height: $line-height-normal;
   color: var(--text-primary);
   background-color: var(--background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color $transition-slow, color $transition-slow;
 
   @include custom-scrollbar;
+
+  // Subtle scanlines overlay on entire page
+  &::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 2px,
+      rgba(0, 0, 0, 0.02) 2px,
+      rgba(0, 0, 0, 0.02) 4px
+    );
+    pointer-events: none;
+    z-index: $z-index-scanlines;
+  }
 }
 
 // ======================
@@ -96,36 +126,69 @@ body {
 // ======================
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: $font-weight-semibold;
+  @include pixel-text;
   line-height: $line-height-tight;
-  letter-spacing: $letter-spacing-tight;
   color: var(--text-primary);
 }
 
-h1 { font-size: $font-size-5xl; }
-h2 { font-size: $font-size-4xl; }
-h3 { font-size: $font-size-3xl; }
-h4 { font-size: $font-size-2xl; }
-h5 { font-size: $font-size-xl; }
-h6 { font-size: $font-size-lg; }
+h1 {
+  font-size: $font-size-4xl;
+
+  @include md {
+    font-size: $font-size-5xl;
+  }
+}
+
+h2 {
+  font-size: $font-size-3xl;
+
+  @include md {
+    font-size: $font-size-4xl;
+  }
+}
+
+h3 {
+  font-size: $font-size-2xl;
+
+  @include md {
+    font-size: $font-size-3xl;
+  }
+}
+
+h4 { font-size: $font-size-xl; }
+h5 { font-size: $font-size-lg; }
+h6 { font-size: $font-size-base; }
 
 p {
+  @include terminal-text;
   color: var(--text-secondary);
   line-height: $line-height-relaxed;
+  font-size: $font-size-terminal-base;
 }
 
 a {
   color: var(--primary);
   text-decoration: none;
-  transition: color $transition-fast;
+  transition: color $transition-fast, text-shadow $transition-fast;
 
   &:hover {
-    text-decoration: underline;
+    color: var(--primary-bright);
+    @include crt-glow-sm(var(--primary));
+    text-decoration: none;
   }
 
   &:focus-visible {
-    @include focus-ring;
+    @include focus-ring-retro;
   }
+}
+
+// ======================
+// SELECTION
+// ======================
+
+::selection {
+  background: $phosphor-green;
+  color: $bg-primary;
 }
 
 // ======================
@@ -161,6 +224,48 @@ a {
 }
 
 // ======================
+// CRT EFFECTS
+// ======================
+
+.crt-glow {
+  @include crt-glow(var(--primary));
+}
+
+.scanlines {
+  @include scanlines;
+}
+
+// ======================
+// RETRO HELPERS
+// ======================
+
+.pixel-text {
+  @include pixel-text;
+}
+
+.terminal-text {
+  @include terminal-text;
+}
+
+.retro-shadow {
+  @include retro-shadow;
+}
+
+.retro-card {
+  @include retro-card;
+}
+
+// ======================
+// CURSOR BLINK
+// ======================
+
+.cursor-blink::after {
+  content: '█';
+  color: var(--primary);
+  animation: blink 1s infinite step-end;
+}
+
+// ======================
 // ANIMATIONS (Reduced Motion Support)
 // ======================
 
@@ -171,5 +276,65 @@ a {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  // Disable scanlines for reduced motion
+  body::after {
+    display: none;
+  }
+}
+
+// ======================
+// ASCII DECORATORS
+// ======================
+
+.ascii-border {
+  position: relative;
+  padding: $spacing-md;
+
+  &::before {
+    content: '╔' attr(data-top) '╗';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    color: var(--border);
+    font-family: monospace;
+  }
+
+  &::after {
+    content: '╚' attr(data-bottom) '╝';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: var(--border);
+    font-family: monospace;
+  }
+}
+
+// ======================
+// LOADING STATES
+// ======================
+
+.loading-bar {
+  @include loading-bar;
+  width: 200px;
+  max-width: 100%;
+}
+
+// ======================
+// RESPONSIVE FONT ADJUSTMENTS
+// ======================
+
+// Pixel fonts son más pequeñas visualmente, ajustamos en mobile
+@media (max-width: $breakpoint-sm) {
+  h1 { font-size: $font-size-2xl; }
+  h2 { font-size: $font-size-xl; }
+  h3 { font-size: $font-size-lg; }
+  h4, h5, h6 { font-size: $font-size-base; }
+
+  p {
+    font-size: $font-size-terminal-sm;
   }
 }

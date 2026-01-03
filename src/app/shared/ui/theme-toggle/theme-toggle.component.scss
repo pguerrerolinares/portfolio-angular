@@ -1,0 +1,31 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: $border-width solid $border-color;
+  background: $bg-surface;
+  color: $text-dim;
+  cursor: pointer;
+  @include retro-shadow('sm');
+  transition: all $transition-fast;
+
+  &:hover {
+    color: $phosphor-green;
+    border-color: $phosphor-green;
+    @include crt-glow-sm($phosphor-green);
+  }
+
+  &:active {
+    box-shadow: $shadow-pressed;
+    transform: translate(1px, 1px);
+  }
+
+  &:focus-visible {
+    @include focus-ring-retro;
+  }
+}

@@ -1,0 +1,86 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.experience {
+  &__timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+
+    @include md {
+      gap: $spacing-xl;
+    }
+  }
+
+  &__item {
+    display: block;
+
+    @include lg {
+      display: grid;
+      gap: $spacing-md;
+      grid-template-columns: 1fr auto 1fr;
+    }
+
+    &--right {
+      @include lg {
+        .experience__card {
+          grid-column: 3;
+        }
+        .experience__connector {
+          grid-column: 2;
+          grid-row: 1;
+        }
+      }
+    }
+  }
+
+  &__card {
+    @include lg {
+      grid-column: 1;
+    }
+  }
+
+  &__connector {
+    display: none;
+
+    @include lg {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: $spacing-lg;
+      grid-column: 2;
+    }
+  }
+
+  &__dot {
+    width: 12px;
+    height: 12px;
+    background: $phosphor-green;
+    flex-shrink: 0;
+    position: relative;
+    @include crt-glow-sm($phosphor-green);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border: $border-width solid $phosphor-green;
+      opacity: 0.3;
+    }
+  }
+
+  &__line {
+    width: $border-width;
+    flex-grow: 1;
+    background: repeating-linear-gradient(
+      to bottom,
+      $phosphor-green 0,
+      $phosphor-green 4px,
+      transparent 4px,
+      transparent 8px
+    );
+    margin-top: $spacing-sm;
+    opacity: 0.5;
+  }
+}

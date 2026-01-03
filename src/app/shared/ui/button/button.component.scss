@@ -1,0 +1,118 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.btn {
+  @include pixel-text;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  border: $border-width solid $phosphor-green;
+  background: $bg-surface;
+  color: $phosphor-green;
+  @include retro-shadow('sm');
+  transition: all $transition-fast;
+
+  @include md {
+    gap: $spacing-sm;
+    @include retro-shadow;
+  }
+
+  &:hover:not(:disabled) {
+    background: $phosphor-green;
+    color: $bg-primary;
+    box-shadow: $shadow-retro-hover;
+    transform: translate(-2px, -2px);
+    @include crt-glow-sm($phosphor-green);
+  }
+
+  &:active:not(:disabled) {
+    box-shadow: $shadow-pressed;
+    transform: translate(2px, 2px);
+  }
+
+  &:focus-visible {
+    @include focus-ring-retro;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Sizes
+.btn--sm {
+  padding: $spacing-xs $spacing-sm;
+  font-size: 8px;
+
+  @include md {
+    padding: $spacing-xs $spacing-md;
+    font-size: $font-size-xs;
+  }
+}
+
+.btn--md {
+  padding: $spacing-xs $spacing-md;
+  font-size: 8px;
+
+  @include md {
+    padding: $spacing-sm $spacing-lg;
+    font-size: $font-size-xs;
+  }
+}
+
+.btn--lg {
+  padding: $spacing-sm $spacing-lg;
+  font-size: $font-size-xs;
+
+  @include md {
+    padding: $spacing-md $spacing-xl;
+    font-size: $font-size-sm;
+  }
+}
+
+// Variants
+.btn--primary {
+  background: $phosphor-green;
+  color: $bg-primary;
+
+  &:hover:not(:disabled) {
+    background: $text-bright;
+    @include box-glow($phosphor-green);
+  }
+}
+
+.btn--outline {
+  background: transparent;
+  color: $phosphor-green;
+  border-color: $phosphor-green;
+
+  &:hover:not(:disabled) {
+    background: $phosphor-green;
+    color: $bg-primary;
+  }
+}
+
+.btn--ghost {
+  background: transparent;
+  color: $text-dim;
+  border-color: $border-color;
+  box-shadow: none;
+
+  &:hover:not(:disabled) {
+    color: $phosphor-green;
+    border-color: $phosphor-green;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+  }
+}
+
+// Full width
+.btn--full {
+  width: 100%;
+}

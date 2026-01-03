@@ -1,0 +1,12 @@
+<button
+  class="theme-toggle"
+  (click)="themeService.toggleTheme()"
+  [attr.aria-label]="themeService.isDark() ? 'Activar modo claro' : 'Activar modo oscuro'"
+  type="button"
+>
+  @if (themeService.isDark()) {
+    <app-icon name="sun" [size]="20" />
+  } @else {
+    <app-icon name="moon" [size]="20" />
+  }
+</button>

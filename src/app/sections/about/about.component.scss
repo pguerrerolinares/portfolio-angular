@@ -1,0 +1,160 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.about {
+  &__content {
+    display: grid;
+    gap: $spacing-2xl;
+
+    @include lg {
+      grid-template-columns: 1fr auto;
+      gap: $spacing-3xl;
+    }
+  }
+
+  &__terminal {
+    background: $bg-surface;
+    border: $border-width solid $border-color;
+    @include retro-shadow('sm');
+
+    @include md {
+      @include retro-shadow;
+    }
+  }
+
+  &__terminal-header {
+    @include pixel-text;
+    font-size: $font-size-xs;
+    color: $phosphor-green;
+    padding: $spacing-sm $spacing-md;
+    background: $bg-secondary;
+    border-bottom: $border-width solid $border-color;
+  }
+
+  &__terminal-body {
+    padding: $spacing-md;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+
+    @include md {
+      padding: $spacing-lg;
+    }
+  }
+
+  &__text {
+    @include terminal-text;
+    font-size: $font-size-terminal-base;
+    color: $text-dim;
+    line-height: $line-height-relaxed;
+  }
+
+  &__stats {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+
+    @include lg {
+      gap: $spacing-lg;
+    }
+  }
+
+  &__stat {
+    background: $bg-surface;
+    border: $border-width solid $border-color;
+    padding: $spacing-md;
+    @include retro-shadow('sm');
+    transition: all $transition-fast;
+
+    &:hover {
+      border-color: $phosphor-green;
+      @include border-glow($phosphor-green);
+    }
+  }
+
+  &__stat-label {
+    @include terminal-text;
+    font-size: $font-size-terminal-sm;
+    color: $text-dim;
+    display: block;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__stat-number {
+    @include pixel-text;
+    font-size: $font-size-2xl;
+    color: $phosphor-green;
+    @include crt-glow-sm($phosphor-green);
+    display: block;
+
+    @include md {
+      font-size: $font-size-3xl;
+    }
+  }
+
+  &__skills {
+    margin-top: $spacing-2xl;
+
+    @include md {
+      margin-top: $spacing-3xl;
+    }
+  }
+
+  &__skills-header {
+    @include pixel-text;
+    font-size: $font-size-xs;
+    color: $text-dim;
+    margin-bottom: $spacing-md;
+  }
+
+  &__marquee {
+    overflow: hidden;
+    background: $bg-surface;
+    border: $border-width solid $border-color;
+    padding: $spacing-sm;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    );
+
+    @include md {
+      padding: $spacing-md;
+      mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent
+      );
+    }
+  }
+
+  &__marquee-track {
+    display: flex;
+    gap: $spacing-sm;
+    width: max-content;
+    animation: marquee 40s linear infinite;
+
+    @include md {
+      gap: $spacing-md;
+    }
+
+    @include reduced-motion {
+      animation: none;
+      flex-wrap: wrap;
+      width: auto;
+    }
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

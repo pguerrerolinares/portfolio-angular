@@ -1,0 +1,110 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  background: $bg-surface;
+  border: $border-width solid $border-color;
+  transition: all $transition-fast;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  text-align: left;
+  @include retro-shadow('sm');
+
+  @include md {
+    gap: $spacing-md;
+    padding: $spacing-lg;
+  }
+
+  &--link,
+  &--button {
+    cursor: pointer;
+
+    &:hover {
+      transform: translate(-2px, -2px);
+      @include retro-shadow;
+      border-color: var(--accent-color, $phosphor-green);
+      @include border-glow(var(--accent-color, $phosphor-green));
+      text-decoration: none;
+
+      .contact-card__icon {
+        @include crt-glow-sm(var(--accent-color, $phosphor-green));
+      }
+    }
+
+    &:active {
+      transform: translate(2px, 2px);
+      box-shadow: $shadow-pressed;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $phosphor-green;
+      outline-offset: 2px;
+    }
+  }
+
+  &--button {
+    background: $bg-surface;
+    border: $border-width solid $border-color;
+    font: inherit;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: $bg-secondary;
+    border: $border-width solid $border-color;
+    color: var(--accent-color, $phosphor-green);
+    flex-shrink: 0;
+    transition: all $transition-fast;
+
+    @include md {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  &__content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  &__label {
+    @include terminal-text;
+    font-size: $font-size-terminal-sm;
+    color: $text-dim;
+  }
+
+  &__value {
+    @include pixel-text;
+    font-size: 8px;
+    color: var(--accent-color, $phosphor-green);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include md {
+      font-size: 10px;
+    }
+  }
+
+  &__action {
+    color: $text-dim;
+    flex-shrink: 0;
+    transition: color $transition-fast;
+
+    .contact-card:hover & {
+      color: var(--accent-color, $phosphor-green);
+    }
+  }
+}

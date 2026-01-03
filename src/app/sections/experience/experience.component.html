@@ -1,0 +1,32 @@
+<section class="experience section" id="experience" [attr.aria-label]="'experience.title' | translate">
+  <div class="container">
+    <app-section-title
+      [eyebrow]="'experience.eyebrow' | translate"
+      [description]="'experience.description' | translate"
+    >
+      {{ 'experience.title' | translate }}
+    </app-section-title>
+
+    <!-- Timeline -->
+    <div class="experience__timeline">
+      @for (exp of experiences; track exp.id; let i = $index; let odd = $odd) {
+        <div
+          class="experience__item"
+          [class.experience__item--right]="odd"
+          [@fadeInLeft]="!odd"
+          [@fadeInRight]="odd"
+        >
+          <div class="experience__card">
+            <app-experience-card [experience]="exp" />
+          </div>
+          <div class="experience__connector">
+            <div class="experience__dot"></div>
+            @if (i < experiences.length - 1) {
+              <div class="experience__line"></div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

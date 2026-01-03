@@ -8,162 +8,12 @@ import { fadeInUp, staggerList } from '../../shared/animations/triggers';
 
 @Component({
   selector: 'app-about',
+  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, TranslateModule, SectionTitleComponent, BadgeComponent],
   animations: [fadeInUp, staggerList],
-  template: `
-    <section class="about section" id="about" [attr.aria-label]="'about.title' | translate">
-      <div class="container">
-        <app-section-title
-          [eyebrow]="'about.eyebrow' | translate"
-        >
-          {{ 'about.title' | translate }}
-        </app-section-title>
-
-        <div class="about__content">
-          <!-- Bio -->
-          <div class="about__bio" @fadeInUp>
-            <p class="about__text">{{ 'about.bio.p1' | translate }}</p>
-            <p class="about__text">{{ 'about.bio.p2' | translate }}</p>
-            <p class="about__text">{{ 'about.bio.p3' | translate }}</p>
-          </div>
-
-          <!-- Stats -->
-          <div class="about__stats" @staggerList>
-            <div class="about__stat">
-              <span class="about__stat-number">{{ animatedYears() }}+</span>
-              <span class="about__stat-label">{{ 'about.stats.years' | translate }}</span>
-            </div>
-            <div class="about__stat">
-              <span class="about__stat-number">{{ animatedTech() }}+</span>
-              <span class="about__stat-label">{{ 'about.stats.technologies' | translate }}</span>
-            </div>
-            <div class="about__stat">
-              <span class="about__stat-number">{{ animatedProjects() }}+</span>
-              <span class="about__stat-label">{{ 'about.stats.projects' | translate }}</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Skills Marquee -->
-        <div class="about__skills" @fadeInUp>
-          <div class="about__marquee">
-            <div class="about__marquee-track">
-              @for (skill of skills; track skill.name) {
-                <app-badge [variant]="'category'" [color]="getSkillColor(skill.category)">
-                  {{ skill.name }}
-                </app-badge>
-              }
-              <!-- Duplicate for seamless loop -->
-              @for (skill of skills; track skill.name + '-dup') {
-                <app-badge [variant]="'category'" [color]="getSkillColor(skill.category)">
-                  {{ skill.name }}
-                </app-badge>
-              }
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  `,
-  styles: `
-    @use 'styles/variables' as *;
-    @use 'styles/mixins' as *;
-
-    .about {
-      &__content {
-        display: grid;
-        gap: $spacing-2xl;
-
-        @include lg {
-          grid-template-columns: 1fr auto;
-          gap: $spacing-3xl;
-        }
-      }
-
-      &__bio {
-        display: flex;
-        flex-direction: column;
-        gap: $spacing-lg;
-      }
-
-      &__text {
-        @include body-large;
-        color: var(--text-secondary);
-      }
-
-      &__stats {
-        display: flex;
-        gap: $spacing-xl;
-
-        @include lg {
-          flex-direction: column;
-          gap: $spacing-lg;
-        }
-      }
-
-      &__stat {
-        display: flex;
-        flex-direction: column;
-        gap: $spacing-xs;
-        text-align: center;
-
-        @include lg {
-          text-align: left;
-        }
-      }
-
-      &__stat-number {
-        font-size: $font-size-4xl;
-        font-weight: $font-weight-bold;
-        color: var(--primary);
-        line-height: 1;
-      }
-
-      &__stat-label {
-        font-size: $font-size-sm;
-        color: var(--text-secondary);
-      }
-
-      &__skills {
-        margin-top: $spacing-3xl;
-        overflow: hidden;
-        mask-image: linear-gradient(
-          to right,
-          transparent,
-          black 10%,
-          black 90%,
-          transparent
-        );
-      }
-
-      &__marquee {
-        overflow: hidden;
-      }
-
-      &__marquee-track {
-        display: flex;
-        gap: $spacing-md;
-        width: max-content;
-        animation: marquee 40s linear infinite;
-
-        @include reduced-motion {
-          animation: none;
-          flex-wrap: wrap;
-          width: auto;
-        }
-      }
-    }
-
-    @keyframes marquee {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
-    }
-  `,
+  templateUrl: './about.component.html',
+  styleUrl: './about.component.scss',
 })
 export class AboutComponent {
   private platformId = inject(PLATFORM_ID);
@@ -219,12 +69,12 @@ export class AboutComponent {
 
   getSkillColor(category: string): string {
     const colors: Record<string, string> = {
-      frontend: 'var(--primary)',
-      backend: 'var(--teal)',
-      ai: 'var(--indigo)',
-      devops: 'var(--sky)',
-      tools: 'var(--text-secondary)',
-      methodologies: 'var(--warning)',
+      frontend: 'var(--arcade-cyan)',
+      backend: 'var(--primary)',
+      ai: 'var(--arcade-yellow)',
+      devops: 'var(--arcade-magenta)',
+      tools: 'var(--phosphor-amber)',
+      methodologies: 'var(--arcade-orange)',
     };
     return colors[category] || 'var(--primary)';
   }

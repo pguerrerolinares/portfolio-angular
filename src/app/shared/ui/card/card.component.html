@@ -1,0 +1,15 @@
+<article
+  class="card"
+  [class.card--clickable]="clickable()"
+  [class.card--no-padding]="noPadding()"
+  [@hoverLift]="hoverState()"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
+  [style.--accent-color]="accentColor()"
+>
+  @if (accentColor()) {
+    <div class="card__accent"></div>
+  }
+  <div class="card__inner-border"></div>
+  <ng-content />
+</article>

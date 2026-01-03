@@ -29,43 +29,59 @@
 }
 
 // ======================
-// TYPOGRAPHY MIXINS
+// RETRO TYPOGRAPHY MIXINS
 // ======================
 
+@mixin pixel-text {
+  font-family: $font-pixel;
+  letter-spacing: $letter-spacing-pixel;
+  text-transform: uppercase;
+}
+
+@mixin terminal-text {
+  font-family: $font-terminal;
+  letter-spacing: $letter-spacing-wide;
+}
+
 @mixin heading-display {
+  @include pixel-text;
   font-size: $font-size-display;
-  font-weight: $font-weight-bold;
   line-height: $line-height-tight;
-  letter-spacing: $letter-spacing-tight;
+  color: $phosphor-green;
 }
 
 @mixin heading-hero {
+  @include pixel-text;
   font-size: $font-size-hero;
-  font-weight: $font-weight-bold;
   line-height: $line-height-tight;
-  letter-spacing: $letter-spacing-tight;
+  color: $phosphor-green;
 }
 
 @mixin eyebrow {
+  @include pixel-text;
   font-size: $font-size-xs;
-  font-weight: $font-weight-semibold;
-  text-transform: uppercase;
-  letter-spacing: $letter-spacing-eyebrow;
+  color: $text-dim;
 }
 
 @mixin body-large {
-  font-size: $font-size-lg;
+  @include terminal-text;
+  font-size: $font-size-terminal-lg;
   line-height: $line-height-relaxed;
+  color: $phosphor-green;
 }
 
 @mixin body-base {
-  font-size: $font-size-base;
+  @include terminal-text;
+  font-size: $font-size-terminal-base;
   line-height: $line-height-normal;
+  color: $phosphor-green;
 }
 
 @mixin body-small {
-  font-size: $font-size-sm;
+  @include terminal-text;
+  font-size: $font-size-terminal-sm;
   line-height: $line-height-normal;
+  color: $text-dim;
 }
 
 // ======================
@@ -96,84 +112,271 @@
 }
 
 // ======================
-// VISUAL MIXINS
+// RETRO SHADOW MIXINS
 // ======================
 
-@mixin card {
-  background: var(--surface);
-  border-radius: $border-radius-md;
-  border: $border-width solid var(--border);
-  transition: transform $transition-base, box-shadow $transition-base;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: $shadow-lg;
+@mixin retro-shadow($size: 'md') {
+  @if $size == 'sm' {
+    box-shadow: $shadow-retro-sm;
+  } @else if $size == 'lg' {
+    box-shadow: $shadow-retro-lg;
+  } @else {
+    box-shadow: $shadow-retro;
   }
 }
 
-@mixin gradient-text($from, $to) {
+@mixin retro-shadow-hover {
+  transition: box-shadow $transition-fast, transform $transition-fast;
+
+  &:hover {
+    box-shadow: $shadow-retro-hover;
+    transform: translate(-2px, -2px);
+  }
+
+  &:active {
+    box-shadow: $shadow-pressed;
+    transform: translate(2px, 2px);
+  }
+}
+
+// ======================
+// CRT/GLOW EFFECTS
+// ======================
+
+@mixin crt-glow($color: currentColor) {
+  text-shadow:
+    0 0 5px $color,
+    0 0 10px $color,
+    0 0 20px $color;
+}
+
+@mixin crt-glow-sm($color: currentColor) {
+  text-shadow:
+    0 0 2px $color,
+    0 0 5px $color;
+}
+
+@mixin box-glow($color: $phosphor-green) {
+  box-shadow:
+    0 0 5px $color,
+    0 0 10px rgba($color, 0.5),
+    0 0 20px rgba($color, 0.3);
+}
+
+@mixin border-glow($color: $phosphor-green) {
+  border-color: $color;
+  box-shadow: 0 0 10px rgba($color, 0.5);
+}
+
+// ======================
+// SCANLINES EFFECT
+// ======================
+
+@mixin scanlines($opacity: 0.03) {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 2px,
+      rgba(0, 0, 0, $opacity) 2px,
+      rgba(0, 0, 0, $opacity) 4px
+    );
+    pointer-events: none;
+    z-index: $z-index-scanlines;
+  }
+}
+
+@mixin scanlines-subtle {
+  @include scanlines(0.02);
+}
+
+@mixin scanlines-strong {
+  @include scanlines(0.08);
+}
+
+@mixin scanlines-overlay {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: $z-index-scanlines;
+}
+
+// ======================
+// RETRO CARD MIXINS
+// ======================
+
+@mixin retro-card {
+  background: $bg-surface;
+  border: $border-width solid $border-color;
+  @include retro-shadow;
+  transition: all $transition-base;
+
+  &:hover {
+    border-color: $phosphor-green;
+    @include retro-shadow-hover;
+  }
+}
+
+@mixin retro-card-ascii {
+  @include retro-card;
+  position: relative;
+
+  // ASCII-style double border effect
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border: 1px solid rgba($phosphor-green, 0.2);
+    pointer-events: none;
+  }
+}
+
+// ======================
+// RETRO BUTTON MIXINS
+// ======================
+
+@mixin retro-button-base {
+  @include pixel-text;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-md $spacing-xl;
+  font-size: $font-size-xs;
+  background: $bg-surface;
+  color: $phosphor-green;
+  border: $border-width solid $phosphor-green;
+  cursor: pointer;
+  text-decoration: none;
+  @include retro-shadow;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $phosphor-green;
+    color: $bg-primary;
+    @include crt-glow-sm($phosphor-green);
+    box-shadow: $shadow-retro-hover;
+    transform: translate(-2px, -2px);
+    text-decoration: none;
+  }
+
+  &:active {
+    box-shadow: $shadow-pressed;
+    transform: translate(2px, 2px);
+  }
+
+  &:focus-visible {
+    @include focus-ring-retro;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      background: $bg-surface;
+      color: $phosphor-green;
+      transform: none;
+      box-shadow: $shadow-retro;
+    }
+  }
+}
+
+@mixin retro-button-primary {
+  @include retro-button-base;
+  background: $phosphor-green;
+  color: $bg-primary;
+
+  &:hover {
+    background: $text-bright;
+    color: $bg-primary;
+    @include box-glow($phosphor-green);
+  }
+}
+
+@mixin retro-button-outline {
+  @include retro-button-base;
+}
+
+@mixin retro-button-ghost {
+  @include retro-button-base;
+  background: transparent;
+  border-color: $border-color;
+  box-shadow: none;
+
+  &:hover {
+    border-color: $phosphor-green;
+    background: transparent;
+    color: $phosphor-green;
+    box-shadow: none;
+    transform: none;
+  }
+}
+
+// ======================
+// FOCUS STATES
+// ======================
+
+@mixin focus-ring {
+  outline: 2px solid $phosphor-green;
+  outline-offset: 2px;
+}
+
+@mixin focus-ring-retro {
+  outline: 2px solid $phosphor-green;
+  outline-offset: 4px;
+  @include box-glow($phosphor-green);
+}
+
+// ======================
+// GRADIENT TEXT (Retro style)
+// ======================
+
+@mixin gradient-text($from: $phosphor-green, $to: $arcade-cyan) {
   background: linear-gradient(135deg, $from, $to);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-@mixin focus-ring {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-
 // ======================
-// BUTTON MIXINS
+// RETRO INPUT MIXINS
 // ======================
 
-@mixin button-base {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: $spacing-sm;
-  padding: $spacing-sm $spacing-lg;
-  font-size: $font-size-sm;
-  font-weight: $font-weight-medium;
-  border-radius: $border-radius-full;
-  cursor: pointer;
-  transition: all $transition-base;
-  border: none;
-  text-decoration: none;
+@mixin retro-input {
+  @include terminal-text;
+  font-size: $font-size-terminal-base;
+  background: $bg-primary;
+  color: $phosphor-green;
+  border: $border-width solid $border-color;
+  padding: $spacing-sm $spacing-md;
+  transition: border-color $transition-fast, box-shadow $transition-fast;
 
-  &:focus-visible {
-    @include focus-ring;
+  &::placeholder {
+    color: $text-dim;
   }
 
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-}
-
-@mixin button-primary {
-  @include button-base;
-  background: var(--primary);
-  color: white;
-
-  &:hover:not(:disabled) {
-    filter: brightness(1.1);
-  }
-}
-
-@mixin button-outline {
-  @include button-base;
-  background: transparent;
-  color: var(--text-primary);
-  border: $border-width solid var(--border);
-
-  &:hover:not(:disabled) {
-    background: var(--surface-hover);
+  &:focus {
+    outline: none;
+    border-color: $phosphor-green;
+    @include border-glow($phosphor-green);
   }
 }
 
 // ======================
-// ANIMATION MIXINS
+// ANIMATIONS
 // ======================
 
 @mixin reduced-motion {
@@ -182,8 +385,26 @@
   }
 }
 
+// Blink cursor animation
+@mixin cursor-blink {
+  &::after {
+    content: '█';
+    animation: blink 1s infinite step-end;
+  }
+}
+
+// Typing effect placeholder
+@mixin typing-effect($width: 20ch, $duration: 2s) {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid $phosphor-green;
+  animation:
+    typing $duration steps($width) forwards,
+    blink-caret 0.75s step-end infinite;
+}
+
 // ======================
-// SCROLLBAR
+// SCROLLBAR (Retro style)
 // ======================
 
 @mixin custom-scrollbar {
@@ -193,15 +414,97 @@
   }
 
   &::-webkit-scrollbar-track {
-    background: var(--background);
+    background: $bg-primary;
+    border: 1px solid $border-color;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--text-secondary);
-    border-radius: $border-radius-full;
+    background: $text-dim;
+    border: 1px solid $border-color;
 
     &:hover {
-      background: var(--text-primary);
+      background: $phosphor-green;
     }
   }
+}
+
+// ======================
+// PIXEL BORDER (ASCII style)
+// ======================
+
+@mixin pixel-border($color: $phosphor-green) {
+  border: $border-width solid $color;
+  // Simular esquinas pixeladas con box-shadow
+  box-shadow:
+    inset 2px 2px 0 $color,
+    inset -2px -2px 0 $color;
+}
+
+// ======================
+// LOADING BAR
+// ======================
+
+@mixin loading-bar($color: $phosphor-green) {
+  height: 20px;
+  background: $bg-primary;
+  border: $border-width solid $color;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    background: $color;
+    animation: loading 2s ease-in-out infinite;
+  }
+}
+
+// ======================
+// KEYFRAMES
+// ======================
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes blink-caret {
+  50% { border-color: transparent; }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes loading {
+  0% { width: 0%; }
+  50% { width: 100%; }
+  100% { width: 0%; }
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  60% { transform: translate(-2px, -2px); }
+  80% { transform: translate(2px, 2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px currentColor;
+  }
+  50% {
+    box-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }

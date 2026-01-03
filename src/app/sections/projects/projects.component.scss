@@ -1,0 +1,35 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.projects {
+  &__group {
+    &:not(:last-child) {
+      margin-bottom: $spacing-2xl;
+
+      @include md {
+        margin-bottom: $spacing-3xl;
+      }
+    }
+  }
+
+  &__group-title {
+    @include pixel-text;
+    font-size: $font-size-xs;
+    color: $text-dim;
+    margin-bottom: $spacing-md;
+
+    @include md {
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    gap: $spacing-md;
+
+    @include md {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-lg;
+    }
+  }
+}

@@ -1,0 +1,88 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.language-select {
+  position: relative;
+
+  &__trigger {
+    @include terminal-text;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-terminal-sm;
+    color: $phosphor-green;
+    background: $bg-surface;
+    border: $border-width solid $border-color;
+    cursor: pointer;
+    @include retro-shadow('sm');
+    transition: all $transition-fast;
+
+    &:hover {
+      border-color: $phosphor-green;
+      @include border-glow($phosphor-green);
+    }
+
+    &:focus-visible {
+      @include focus-ring-retro;
+    }
+  }
+
+  &__prompt {
+    color: $text-dim;
+  }
+
+  &__current {
+    min-width: 60px;
+  }
+
+  &__icon {
+    color: $text-dim;
+    transition: transform $transition-fast;
+
+    &--open {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: calc(100% + $spacing-xs);
+    left: 0;
+    right: 0;
+    background: $bg-surface;
+    border: $border-width solid $phosphor-green;
+    @include retro-shadow;
+    list-style: none;
+    padding: $spacing-xs;
+    z-index: $z-index-dropdown;
+    @include border-glow($phosphor-green);
+  }
+
+  &__option {
+    @include terminal-text;
+    display: flex;
+    align-items: center;
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-terminal-sm;
+    color: $phosphor-green;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba($phosphor-green, 0.1);
+      @include crt-glow-sm($phosphor-green);
+    }
+
+    &--active {
+      color: $text-bright;
+      @include crt-glow-sm($phosphor-green);
+    }
+  }
+
+  &__option-indicator {
+    width: 1ch;
+    margin-right: $spacing-xs;
+    color: $arcade-yellow;
+  }
+}

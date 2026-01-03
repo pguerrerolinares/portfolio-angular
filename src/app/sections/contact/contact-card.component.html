@@ -1,0 +1,46 @@
+@if (href()) {
+  <a
+    [href]="href()"
+    [target]="external() ? '_blank' : null"
+    [rel]="external() ? 'noopener noreferrer' : null"
+    class="contact-card contact-card--link"
+    [style.--accent-color]="accentColor()"
+    [attr.aria-label]="external() ? label() + ' (abre en nueva pestaña)' : label()"
+  >
+    <ng-container [ngTemplateOutlet]="cardContent" />
+  </a>
+} @else if (copyable()) {
+  <button
+    class="contact-card contact-card--button"
+    [style.--accent-color]="accentColor()"
+    (click)="copyToClipboard()"
+    [attr.aria-label]="'Copiar ' + value()"
+  >
+    <ng-container [ngTemplateOutlet]="cardContent" />
+  </button>
+} @else {
+  <div class="contact-card" [style.--accent-color]="accentColor()">
+    <ng-container [ngTemplateOutlet]="cardContent" />
+  </div>
+}
+
+<ng-template #cardContent>
+  <div class="contact-card__icon" aria-hidden="true">
+    <app-icon [name]="icon()" [size]="24" />
+  </div>
+  <div class="contact-card__content">
+    <span class="contact-card__label">> {{ label() }}</span>
+    <span class="contact-card__value">{{ value() }}</span>
+  </div>
+  @if (href() || copyable()) {
+    <div class="contact-card__action" aria-hidden="true">
+      @if (copied()) {
+        <app-icon name="check" [size]="18" />
+      } @else if (copyable()) {
+        <app-icon name="copy" [size]="18" />
+      } @else {
+        <app-icon name="arrow-right" [size]="18" />
+      }
+    </div>
+  }
+</ng-template>

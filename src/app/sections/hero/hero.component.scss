@@ -1,0 +1,217 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: $bg-primary;
+
+  &__scanlines {
+    @include scanlines-overlay;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 80px 0 $spacing-2xl;
+  }
+
+  &__terminal {
+    width: 100%;
+    max-width: 800px;
+    background: $bg-surface;
+    border: $border-width solid $phosphor-green;
+    @include retro-shadow('sm');
+    @include border-glow($phosphor-green);
+
+    @include md {
+      @include retro-shadow('lg');
+    }
+  }
+
+  &__terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-sm $spacing-md;
+    background: $bg-secondary;
+    border-bottom: $border-width solid $border-color;
+  }
+
+  &__terminal-title {
+    @include pixel-text;
+    font-size: $font-size-xs;
+    color: $phosphor-green;
+  }
+
+  &__terminal-controls { display: flex; gap: $spacing-sm; }
+
+  &__terminal-btn {
+    @include terminal-text;
+    font-size: $font-size-terminal-base;
+    cursor: pointer;
+    &--minimize { color: $arcade-yellow; }
+    &--maximize { color: $phosphor-green; }
+    &--close { color: $arcade-red; }
+    &:hover { @include crt-glow-sm(currentColor); }
+  }
+
+  &__terminal-body { padding: $spacing-lg; }
+
+  &__loading { margin-bottom: $spacing-xl; }
+
+  &__loading-text {
+    @include terminal-text;
+    font-size: $font-size-terminal-sm;
+    color: $text-dim;
+    display: block;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__loading-bar {
+    height: 16px;
+    background: $bg-primary;
+    border: $border-width solid $phosphor-green;
+    padding: 2px;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__loading-progress {
+    height: 100%;
+    background: $phosphor-green;
+    animation: loadingComplete 1.5s ease-out forwards;
+  }
+
+  &__loading-complete {
+    @include pixel-text;
+    font-size: $font-size-xs;
+    color: $phosphor-green;
+    @include crt-glow-sm($phosphor-green);
+  }
+
+  &__greeting {
+    @include terminal-text;
+    font-size: $font-size-terminal-lg;
+    color: $text-dim;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__name {
+    @include pixel-text;
+    font-size: $font-size-3xl;
+    color: $phosphor-green;
+    margin-bottom: $spacing-md;
+    @include crt-glow($phosphor-green);
+    line-height: 1.3;
+    @include md { font-size: $font-size-4xl; }
+  }
+
+  &__cursor {
+    display: inline-block;
+    width: 0.6em;
+    height: 1em;
+    background: $phosphor-green;
+    margin-left: $spacing-xs;
+    animation: blink 1s step-end infinite;
+  }
+
+  &__role {
+    @include terminal-text;
+    font-size: $font-size-terminal-xl;
+    color: $arcade-cyan;
+    margin-bottom: $spacing-md;
+  }
+
+  &__separator {
+    @include terminal-text;
+    font-size: $font-size-terminal-sm;
+    color: $border-color;
+    margin-bottom: $spacing-md;
+  }
+
+  &__description {
+    @include terminal-text;
+    font-size: $font-size-terminal-base;
+    color: $text-dim;
+    max-width: 50ch;
+    margin-bottom: $spacing-xl;
+    line-height: $line-height-relaxed;
+  }
+
+  &__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__cta-btn {
+    @include retro-button-base;
+    &--primary { @include retro-button-primary; }
+    &--outline { @include retro-button-outline; }
+  }
+
+  &__social {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+  }
+
+  &__social-label {
+    @include terminal-text;
+    font-size: $font-size-terminal-sm;
+    color: $text-dim;
+  }
+
+  &__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    color: $text-dim;
+    border: $border-width solid $border-color;
+    background: $bg-surface;
+    @include retro-shadow('sm');
+    transition: all $transition-fast;
+
+    &:hover {
+      color: $phosphor-green;
+      border-color: $phosphor-green;
+      @include crt-glow-sm($phosphor-green);
+    }
+
+    &:focus-visible { @include focus-ring-retro; }
+  }
+
+  &__scroll {
+    position: absolute;
+    bottom: $spacing-xl;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-sm;
+    color: $text-dim;
+    animation: bounceScroll 2s ease-in-out infinite;
+    @include reduced-motion { animation: none; }
+  }
+
+  &__scroll-text {
+    @include pixel-text;
+    font-size: $font-size-xs;
+  }
+
+  &__scroll-icon {
+    color: $phosphor-green;
+    @include crt-glow-sm($phosphor-green);
+  }
+}
+
+@keyframes loadingComplete { 0% { width: 0; } 100% { width: 100%; } }
+@keyframes bounceScroll { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(10px); } }

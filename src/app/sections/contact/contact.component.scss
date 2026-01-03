@@ -1,0 +1,89 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.contact {
+  &__grid {
+    display: grid;
+    gap: $spacing-md;
+    max-width: 800px;
+    margin-inline: auto;
+
+    @include sm {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__availability {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-top: $spacing-2xl;
+    text-align: center;
+
+    @include md {
+      margin-top: $spacing-3xl;
+    }
+  }
+
+  &__availability-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    background: rgba($arcade-cyan, 0.1);
+    border: $border-width solid $arcade-cyan;
+  }
+
+  &__pulse {
+    width: 10px;
+    height: 10px;
+    background: $arcade-cyan;
+    animation: pulse 1s ease-in-out infinite;
+  }
+
+  &__availability-text {
+    @include pixel-text;
+    font-size: 8px;
+    color: $arcade-cyan;
+    @include crt-glow-sm($arcade-cyan);
+  }
+
+  &__availability-description {
+    @include terminal-text;
+    font-size: $font-size-terminal-base;
+    color: $text-dim;
+  }
+
+  &__toast {
+    position: fixed;
+    bottom: $spacing-lg;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: $spacing-sm $spacing-md;
+    background: $bg-surface;
+    @include pixel-text;
+    font-size: 8px;
+    color: $phosphor-green;
+    border: $border-width solid $phosphor-green;
+    @include retro-shadow('sm');
+    z-index: $z-index-tooltip;
+    @include crt-glow-sm($phosphor-green);
+
+    @include md {
+      bottom: $spacing-xl;
+      padding: $spacing-sm $spacing-lg;
+    }
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.3);
+  }
+}

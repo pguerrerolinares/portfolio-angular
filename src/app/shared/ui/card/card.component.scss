@@ -1,0 +1,66 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.card {
+  position: relative;
+  background: $bg-surface;
+  border: $border-width solid $border-color;
+  padding: $spacing-md;
+  overflow: hidden;
+  @include retro-shadow('sm');
+  transition: all $transition-base;
+
+  @include md {
+    padding: $spacing-lg;
+    @include retro-shadow;
+  }
+
+  // ASCII-style inner border
+  &__inner-border {
+    position: absolute;
+    inset: 4px;
+    border: 1px solid rgba($phosphor-green, 0.1);
+    pointer-events: none;
+  }
+
+  &__accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--accent-color, $phosphor-green);
+    box-shadow: 0 0 10px var(--accent-color, $phosphor-green);
+  }
+
+  &:hover {
+    border-color: $phosphor-green;
+  }
+}
+
+.card--clickable {
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: $shadow-retro-hover;
+    transform: translate(-2px, -2px);
+    @include border-glow($phosphor-green);
+
+    .card__inner-border {
+      border-color: rgba($phosphor-green, 0.3);
+    }
+  }
+
+  &:active {
+    box-shadow: $shadow-pressed;
+    transform: translate(2px, 2px);
+  }
+}
+
+.card--no-padding {
+  padding: 0;
+
+  .card__inner-border {
+    display: none;
+  }
+}

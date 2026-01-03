@@ -1,0 +1,96 @@
+<section class="hero" id="hero" [attr.aria-label]="'hero.role' | translate">
+  <!-- Scanlines Overlay -->
+  <div class="hero__scanlines" aria-hidden="true"></div>
+
+  <div class="hero__content container">
+    <!-- Terminal Window -->
+    <div class="hero__terminal" @fadeInUp>
+      <!-- Terminal Header -->
+      <div class="hero__terminal-header">
+        <span class="hero__terminal-title">> portfolio.exe</span>
+        <div class="hero__terminal-controls">
+          <span class="hero__terminal-btn hero__terminal-btn--minimize">─</span>
+          <span class="hero__terminal-btn hero__terminal-btn--maximize">□</span>
+          <span class="hero__terminal-btn hero__terminal-btn--close">×</span>
+        </div>
+      </div>
+
+      <!-- Terminal Content -->
+      <div class="hero__terminal-body">
+        <!-- Loading -->
+        <div class="hero__loading" @fadeIn>
+          <span class="hero__loading-text">> LOADING PORTFOLIO...</span>
+          <div class="hero__loading-bar">
+            <div class="hero__loading-progress"></div>
+          </div>
+          <span class="hero__loading-complete">COMPLETE!</span>
+        </div>
+
+        <!-- Greeting -->
+        <p class="hero__greeting" @fadeInUp>
+          > {{ 'hero.greeting' | translate }}
+        </p>
+
+        <!-- Name -->
+        <h1 class="hero__name" @maskReveal>
+          {{ personalInfo.name }}<span class="hero__cursor"></span>
+        </h1>
+
+        <!-- Role -->
+        <p class="hero__role" @fadeInUp>
+          > {{ 'hero.role' | translate }}
+        </p>
+
+        <!-- Separator -->
+        <div class="hero__separator" aria-hidden="true">════════════════════════════════</div>
+
+        <!-- Description -->
+        <p class="hero__description" @fadeInUp>
+          {{ 'hero.description' | translate }}
+        </p>
+
+        <!-- CTAs -->
+        <div class="hero__ctas" @fadeInUp>
+          <a href="#projects" class="hero__cta-btn hero__cta-btn--primary">
+            > {{ 'hero.cta.projects' | translate }}
+            <app-icon name="arrow-down" [size]="16" />
+          </a>
+          <a href="#contact" class="hero__cta-btn hero__cta-btn--outline">
+            > {{ 'hero.cta.contact' | translate }}
+          </a>
+        </div>
+
+        <!-- Social Links -->
+        <div class="hero__social" @fadeIn>
+          <span class="hero__social-label">> CONNECT:</span>
+          <a
+            [href]="personalInfo.social.github"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hero__social-link"
+            aria-label="GitHub"
+          >
+            <app-icon name="github" [size]="22" />
+          </a>
+          <a
+            [href]="personalInfo.social.linkedin"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hero__social-link"
+            aria-label="LinkedIn"
+          >
+            <app-icon name="linkedin" [size]="22" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="hero__scroll" @bounce>
+      <span class="hero__scroll-text">> {{ 'hero.scroll' | translate }}</span>
+      <div class="hero__scroll-icon">
+        <app-icon name="arrow-down" [size]="20" />
+      </div>
+    </div>
+  </div>
+</section>

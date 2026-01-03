@@ -1,0 +1,49 @@
+<footer class="footer">
+  <div class="footer__content container">
+    <!-- ASCII Border Top -->
+    <div class="footer__ascii-border" aria-hidden="true">
+      ════════════════════════════════════════
+    </div>
+
+    <!-- Social Links -->
+    <div class="footer__social">
+      <a
+        [href]="personalInfo.social.github"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="footer__social-link"
+        aria-label="GitHub"
+      >
+        <app-icon name="github" [size]="20" />
+      </a>
+      <a
+        [href]="personalInfo.social.linkedin"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="footer__social-link"
+        aria-label="LinkedIn"
+      >
+        <app-icon name="linkedin" [size]="20" />
+      </a>
+    </div>
+
+    <!-- Copyright -->
+    <p class="footer__copyright">
+      > {{ 'footer.copyright' | translate: { year: currentYear } }}
+    </p>
+
+    <!-- Built with -->
+    <p class="footer__built-with">
+      {{ 'footer.builtWith' | translate }}
+    </p>
+
+    <!-- ASCII Art -->
+    <pre class="footer__ascii-art" aria-hidden="true">
+    ╔═══════════════════════╗
+    ║   GAME OVER?  NO!     ║
+    ║   INSERT COIN TO      ║
+    ║   CONTINUE...         ║
+    ╚═══════════════════════╝
+    </pre>
+  </div>
+</footer>
