@@ -174,6 +174,16 @@ export const slideInFromLeft = trigger('slideInFromLeft', [
   ]),
 ]);
 
+export const slideUp = trigger('slideUp', [
+  transition(':enter', [
+    style({ transform: 'translateY(100%)' }),
+    animate(TIMING.slow, style({ transform: 'translateY(0)' })),
+  ]),
+  transition(':leave', [
+    animate(TIMING.base, style({ transform: 'translateY(100%)' })),
+  ]),
+]);
+
 // ======================
 // EXPAND/COLLAPSE
 // ======================
@@ -270,6 +280,7 @@ export const ANIMATIONS = [
   staggerList,
   slideInFromRight,
   slideInFromLeft,
+  slideUp,
   expandCollapse,
   bounce,
   pulse,

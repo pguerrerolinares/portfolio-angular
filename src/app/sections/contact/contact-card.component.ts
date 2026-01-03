@@ -1,5 +1,6 @@
 import { Component, input, output, signal, inject, DestroyRef, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { IconComponent, IconName } from '../../shared/ui/icon/icon.component';
 
 @Component({
@@ -32,13 +33,6 @@ import { IconComponent, IconName } from '../../shared/ui/icon/icon.component';
         <ng-container [ngTemplateOutlet]="cardContent" />
       </div>
     }
-
-    <!-- Anuncio accesible para copiado -->
-    <div role="status" aria-live="polite" class="sr-only">
-      @if (copied()) {
-        <span>Copiado al portapapeles</span>
-      }
-    </div>
 
     <ng-template #cardContent>
       <div class="contact-card__icon" aria-hidden="true">
@@ -146,6 +140,7 @@ import { IconComponent, IconName } from '../../shared/ui/icon/icon.component';
 })
 export class ContactCardComponent {
   private destroyRef = inject(DestroyRef);
+  private liveAnnouncer = inject(LiveAnnouncer);
 
   icon = input.required<IconName>();
   label = input.required<string>();
@@ -163,6 +158,7 @@ export class ContactCardComponent {
       await navigator.clipboard.writeText(this.value());
       this.copied.set(true);
       this.onCopy.emit(this.value());
+      this.liveAnnouncer.announce('Copiado al portapapeles', 'polite');
 
       const timeoutId = setTimeout(() => {
         this.copied.set(false);

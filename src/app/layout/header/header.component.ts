@@ -1,26 +1,29 @@
 import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { A11yModule } from '@angular/cdk/a11y';
 import { IconComponent } from '../../shared/ui/icon/icon.component';
 import { ThemeToggleComponent } from '../../shared/ui/theme-toggle/theme-toggle.component';
 import { LanguageSwitcherComponent } from '../../shared/ui/language-switcher/language-switcher.component';
 import { NAV_LINKS, PERSONAL_INFO } from '../../core/constants/portfolio-data';
-import { slideInFromRight } from '../../shared/animations/triggers';
+import { fadeIn, slideUp } from '../../shared/animations/triggers';
 
 @Component({
   selector: 'app-header',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '(window:scroll)': 'onScroll()',
+    '(window:keydown.escape)': 'closeMobileMenu()',
   },
   imports: [
     CommonModule,
     TranslateModule,
+    A11yModule,
     IconComponent,
     ThemeToggleComponent,
     LanguageSwitcherComponent,
   ],
-  animations: [slideInFromRight],
+  animations: [fadeIn, slideUp],
   template: `
     <header class="header" [class.header--scrolled]="isScrolled()">
       <nav class="header__nav container">
@@ -42,39 +45,69 @@ import { slideInFromRight } from '../../shared/animations/triggers';
 
         <!-- Actions -->
         <div class="header__actions">
-          <app-language-switcher />
-          <app-theme-toggle />
+          <div class="header__desktop-controls">
+            <app-language-switcher />
+            <app-theme-toggle />
+          </div>
 
           <!-- Mobile Menu Button -->
           <button
             class="header__menu-btn"
             (click)="toggleMobileMenu()"
             [attr.aria-expanded]="isMobileMenuOpen()"
-            [attr.aria-controls]="'mobile-menu'"
+            [attr.aria-controls]="'bottom-sheet'"
             [attr.aria-label]="isMobileMenuOpen() ? 'Cerrar menú' : 'Abrir menú'"
           >
             <app-icon [name]="isMobileMenuOpen() ? 'close' : 'menu'" [size]="24" aria-hidden="true" />
           </button>
         </div>
       </nav>
-
-      <!-- Mobile Menu -->
-      @if (isMobileMenuOpen()) {
-        <div id="mobile-menu" class="mobile-menu" @slideInFromRight role="dialog" aria-label="Menú de navegación">
-          <nav class="mobile-menu__nav">
-            @for (link of navLinks; track link.href) {
-              <a
-                [href]="link.href"
-                class="mobile-menu__link"
-                (click)="closeMobileMenu()"
-              >
-                {{ link.translationKey | translate }}
-              </a>
-            }
-          </nav>
-        </div>
-      }
     </header>
+
+    <!-- Bottom Sheet Overlay -->
+    @if (isMobileMenuOpen()) {
+      <div
+        class="bottom-sheet-overlay"
+        @fadeIn
+        (click)="closeMobileMenu()"
+        aria-hidden="true"
+      ></div>
+    }
+
+    <!-- Bottom Sheet Menu -->
+    @if (isMobileMenuOpen()) {
+      <div
+        id="bottom-sheet"
+        class="bottom-sheet"
+        @slideUp
+        role="dialog"
+        aria-label="Menú de navegación"
+        cdkTrapFocus
+        [cdkTrapFocusAutoCapture]="true"
+        (touchstart)="onTouchStart($event)"
+        (touchmove)="onTouchMove($event)"
+        (touchend)="onTouchEnd()"
+      >
+        <div class="bottom-sheet__handle" aria-hidden="true"></div>
+
+        <nav class="bottom-sheet__nav">
+          @for (link of navLinks; track link.href) {
+            <a
+              [href]="link.href"
+              class="bottom-sheet__link"
+              (click)="closeMobileMenu()"
+            >
+              {{ link.translationKey | translate }}
+            </a>
+          }
+        </nav>
+
+        <div class="bottom-sheet__actions">
+          <app-theme-toggle />
+          <app-language-switcher />
+        </div>
+      </div>
+    }
   `,
   styles: `
     @use 'styles/variables' as *;
@@ -146,6 +179,16 @@ import { slideInFromRight } from '../../shared/animations/triggers';
         gap: $spacing-sm;
       }
 
+      &__desktop-controls {
+        display: none;
+        align-items: center;
+        gap: $spacing-sm;
+
+        @include md {
+          display: flex;
+        }
+      }
+
       &__menu-btn {
         display: flex;
         align-items: center;
@@ -168,41 +211,77 @@ import { slideInFromRight } from '../../shared/animations/triggers';
       }
     }
 
-    .mobile-menu {
+    .bottom-sheet-overlay {
       position: fixed;
-      top: 64px;
-      right: 0;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: $z-index-modal-backdrop;
+
+      @include md {
+        display: none;
+      }
+    }
+
+    .bottom-sheet {
+      position: fixed;
       bottom: 0;
-      width: 100%;
-      max-width: 300px;
+      left: 0;
+      right: 0;
       background: var(--surface);
-      border-left: $border-width solid var(--border);
-      padding: $spacing-lg;
-      z-index: $z-index-fixed;
+      border-radius: $border-radius-lg $border-radius-lg 0 0;
+      padding: $spacing-md $spacing-lg $spacing-2xl;
+      z-index: $z-index-modal;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
 
       @include md {
         display: none;
       }
 
+      &__handle {
+        width: 40px;
+        height: 4px;
+        background: var(--border);
+        border-radius: 2px;
+        margin: 0 auto $spacing-lg;
+      }
+
       &__nav {
         display: flex;
         flex-direction: column;
-        gap: $spacing-md;
+        gap: $spacing-xs;
       }
 
       &__link {
+        display: flex;
+        align-items: center;
+        padding: $spacing-md;
         font-size: $font-size-lg;
         font-weight: $font-weight-medium;
         color: var(--text-primary);
         text-decoration: none;
-        padding: $spacing-sm 0;
-        border-bottom: $border-width solid var(--border);
-        transition: color $transition-fast;
+        border-radius: $border-radius-sm;
+        transition: background $transition-fast;
 
         &:hover {
-          color: var(--primary);
+          background: var(--surface-hover);
           text-decoration: none;
         }
+
+        &:focus-visible {
+          outline: 2px solid var(--primary);
+          outline-offset: -2px;
+        }
+      }
+
+      &__actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: $spacing-xl;
+        margin-top: $spacing-xl;
+        padding-top: $spacing-lg;
+        border-top: $border-width solid var(--border);
       }
     }
   `,
@@ -214,8 +293,12 @@ export class HeaderComponent {
   isScrolled = signal(false);
   isMobileMenuOpen = signal(false);
 
+  private touchStartY = 0;
+  private touchCurrentY = 0;
+
   onScroll(): void {
     this.isScrolled.set(window.scrollY > 50);
+    this.closeMobileMenu();
   }
 
   toggleMobileMenu(): void {
@@ -224,5 +307,22 @@ export class HeaderComponent {
 
   closeMobileMenu(): void {
     this.isMobileMenuOpen.set(false);
+  }
+
+  onTouchStart(event: TouchEvent): void {
+    this.touchStartY = event.touches[0].clientY;
+  }
+
+  onTouchMove(event: TouchEvent): void {
+    this.touchCurrentY = event.touches[0].clientY;
+  }
+
+  onTouchEnd(): void {
+    const swipeDistance = this.touchCurrentY - this.touchStartY;
+    if (swipeDistance > 50) {
+      this.closeMobileMenu();
+    }
+    this.touchStartY = 0;
+    this.touchCurrentY = 0;
   }
 }
